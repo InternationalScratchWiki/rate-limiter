@@ -1,6 +1,6 @@
 {
 	"name": "Rate Limiter",
-	"descriptionmsg": "",
+	"descriptionmsg": "rate-limiter-desc",
 	"author": ["Jacob G. (jvvg)"],
 	"url": "https://github.com/InternationalScratchWiki/scratch-confirmaccount-v3",
 	"version": "0.1",

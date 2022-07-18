@@ -1,3 +1,4 @@
 {
-	"rate-limiter-rate-limited": "The message that shows when the user is rate limited"
+	"rate-limiter-rate-limited": "The message that shows when the user is rate limited",
+	"rate-limiter-desc": "The extension description"
 }

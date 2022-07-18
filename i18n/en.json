@@ -1,3 +1,4 @@
 {
-	"rate-limiter-rate-limited": "You can only make $1 {{PLURAL:$1|edit|edits}} per $2 {{PLURAL:$2|second|seconds}}. Please wait and try again later."
+	"rate-limiter-rate-limited": "You can only make $1 {{PLURAL:$1|edit|edits}} per $2 {{PLURAL:$2|second|seconds}}. Please wait and try again later.",
+	"rate-limiter-desc": "Apply rate limits to edits and moves"
 }
