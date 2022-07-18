@@ -1,0 +1,24 @@
+{
+	"name": "Rate Limiter",
+	"descriptionmsg": "",
+	"author": ["Jacob G. (jvvg)"],
+	"url": "https://github.com/InternationalScratchWiki/scratch-confirmaccount-v3",
+	"version": "0.1",
+	"license-name": "GPL-2.0-or-later",
+	"MessagesDirs": {
+		"Rate-Limiter": [
+			"i18n"
+		]
+	},
+	"AutoloadClasses": {
+		"RateLimiterHooks": "src/RateLimiterHooks.php",
+		"LimitValidator": "src/LimitValidator.php"
+	},
+	"Hooks": {
+		"EditFilter": "RateLimiterHooks::onEdit",
+		"TitleMove": "RateLimiterHooks::onTitleMove"
+	},
+	"config": {
+		"RateLimiterRestrictions": {}
+	}
+}
