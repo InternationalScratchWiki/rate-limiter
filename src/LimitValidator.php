@@ -2,7 +2,7 @@
 class LimitValidator {
 	public static function isLimited(User $user, &$out_restriction) : bool {
 		$restriction = self::getLimitForUserGroups($user->getGroups());
-		if ($restriction == null || !$restriction['restricted']) { // if there isn't a limit for this user, just allow this and skip the query
+		if ($restriction == null || !$restriction['limited']) { // if there isn't a limit for this user, just allow this and skip the query
 			return false;
 		}
 		
