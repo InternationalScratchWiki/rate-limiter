@@ -10,22 +10,33 @@ class LimitValidator {
 		
 		$numRecentActions = self::numberOfRecentActionsByUser($user, $restriction['interval']);
 		
-		return $numRecentActions > $restriction['limit'];
+		return $numRecentActions >= $restriction['limit'];
 	}
 	
 	private static function numberOfRecentActionsByUser(User $user, int $interval) {
 		$dbr = wfGetDb( DB_REPLICA );
 		
-		$row = $dbr->selectRow(
-			['recentchanges'], //tables
+		$timestampFloor = $dbr->timestamp(wfTimestamp(TS_UNIX) - $interval);
+		
+		// TODO: consolidate these into a single query for improved performance
+		$revisions = $dbr->selectRow(
+			['revision'], //tables
 			['count' => 'COUNT(1)'], //fields
-			['rc_actor' => $user->getActorId(), 'rc_timestamp > ' . $dbr->timestamp(wfTimestamp(TS_UNIX) - $interval)], //conditions
+			['rev_actor' => $user->getActorId(), 'rev_timestamp > ' . $timestampFloor], //conditions
 			__METHOD__,
-			['ORDER BY' => 'rc_timestamp DESC'], // options
+			[], // options
+			[]
+		);
+		$tempRevisions = $dbr->selectRow(
+			['revision_actor_temp'],
+			['count' => 'COUNT(1)'],
+			['revactor_actor' => $user->getActorId(), 'revactor_timestamp > ' . $timestampFloor],
+			__METHOD__,
+			[],
 			[]
 		);
 				
-		return $row->count;
+		return $revisions->count + $tempRevisions->count;
 	}
 	
 	private static function getLimitForUserGroups(array $userGroups) {
