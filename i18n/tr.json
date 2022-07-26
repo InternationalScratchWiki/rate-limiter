@@ -1,0 +1,4 @@
+{
+	"rate-limiter-rate-limited": "$2 {{PLURAL:$2|saniye}} başına sadece $1 tane {{PLURAL:$1|düzenleme}} yapabilirsiniz. Lütfen bekleyin ve daha sonra tekrar deneyin.",
+	"rate-limiter-desc": "Hız sınırlarını düzenlemelere ve taşımalara uygula"
+}
