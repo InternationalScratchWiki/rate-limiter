@@ -1,7 +1,7 @@
 <?php
 class LimitValidator {
 	public static function isLimited(User $user, &$out_restriction) : bool {
-		$restriction = self::getLimitForUserGroups($user->getGroups());
+		$restriction = self::getLimitForUserGroups(self::getUserGroups($user));
 		if ($restriction == null || !$restriction['limited']) { // if there isn't a limit for this user, just allow this and skip the query
 			return false;
 		}
@@ -13,7 +13,12 @@ class LimitValidator {
 		return $numRecentActions >= $restriction['limit'];
 	}
 	
-	private static function numberOfRecentActionsByUser(User $user, int $interval) {
+	private static function getUserGroups(User $user) : array {
+		$userGroupManager = MediaWiki\MediaWikiServices::getInstance()->getUserGroupManager();
+		return $userGroupManager->getUserEffectiveGroups($user);
+	}
+	
+	private static function numberOfRecentActionsByUser(User $user, int $interval) : ?int {
 		$dbr = wfGetDb( DB_REPLICA );
 		
 		$timestampFloor = $dbr->timestamp(wfTimestamp(TS_UNIX) - $interval);
