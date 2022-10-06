@@ -1,4 +1,5 @@
 {
+	"manifest_version": 1,
 	"name": "Rate Limiter",
 	"descriptionmsg": "rate-limiter-desc",
 	"author": ["Jacob G. (jvvg)"],
