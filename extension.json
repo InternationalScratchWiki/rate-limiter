@@ -15,9 +15,14 @@
 		"RateLimiterHooks": "src/RateLimiterHooks.php",
 		"LimitValidator": "src/LimitValidator.php"
 	},
+	"HookHandlers": {
+		"main": {
+			"class": "RateLimiterHooks"
+		}
+	},
 	"Hooks": {
-		"EditFilter": "RateLimiterHooks::onEdit",
-		"TitleMove": "RateLimiterHooks::onTitleMove"
+		"EditFilter": "main",
+		"TitleMove": "main"
 	},
 	"config": {
 		"RateLimiterRestrictions": {}
