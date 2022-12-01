@@ -19,7 +19,7 @@ class RateLimiterHooks implements TitleMoveHook, EditFilterHook {
 		return true;
 	}
 	
-	public function onTitleMove(Title $oldTitle, Title $newTitle, User $user, $reason, Status &$status) {
+	public function onTitleMove($oldTitle, $newTitle, $user, $reason, &$status) {
 		if (LimitValidator::isLimited($user, $restriction)) {
 			$status->fatal('rate-limiter-rate-limited', $restriction['limit'], $restriction['interval']);
 		}
