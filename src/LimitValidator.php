@@ -1,4 +1,6 @@
 <?php
+use MediaWiki\MediaWikiServices;
+
 class LimitValidator {
 	public static function isLimited(User $user, &$out_restriction) : bool {
 		$restriction = self::getLimitForUserGroups(self::getUserGroups($user));
@@ -19,7 +21,8 @@ class LimitValidator {
 	}
 	
 	private static function numberOfRecentActionsByUser(User $user, int $interval) : ?int {
-		$dbr = wfGetDb( DB_REPLICA );
+		$loadBalancer = MediaWikiServices::getInstance()->getDBLoadBalancer();
+		$dbr = $loadBalancer->getConnection( DB_REPLICA );
 		
 		$timestampFloor = $dbr->timestamp(wfTimestamp(TS_UNIX) - $interval);
 		
