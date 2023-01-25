@@ -32,16 +32,8 @@ class LimitValidator {
 			[], // options
 			[]
 		);
-		$tempRevisions = $dbr->selectRow(
-			['revision_actor_temp'],
-			['count' => 'COUNT(1)'],
-			['revactor_actor' => $user->getActorId(), 'revactor_timestamp > ' . $timestampFloor],
-			__METHOD__,
-			[],
-			[]
-		);
-				
-		return $revisions->count + $tempRevisions->count;
+		
+		return $revisions->count;
 	}
 	
 	private static function getLimitForUserGroups(array $userGroups) {
